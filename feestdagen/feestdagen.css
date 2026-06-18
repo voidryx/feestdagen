@@ -1,0 +1,52 @@
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+    margin: 0;
+    padding: 20px;
+}
+
+/* wrapper zorgt dat alles mooi gecentreerd is */
+.table-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+/* tabel styling */
+table {
+    border-collapse: collapse;
+    width: 80%;
+    max-width: 700px;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+/* header */
+th {
+    background: #4a90e2;
+    color: white;
+    padding: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* cellen */
+td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+}
+
+/* hover effect */
+tr:hover {
+    background: #f2f6ff;
+    transition: 0.2s;
+}
+
+/* laatste rij geen rand */
+tr:last-child td {
+    border-bottom: none;
+}

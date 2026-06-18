@@ -1,4 +1,3 @@
-
 body {
     font-family: Arial, sans-serif;
     background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
@@ -6,47 +5,27 @@ body {
     padding: 20px;
 }
 
-/* wrapper zorgt dat alles mooi gecentreerd is */
-.table-wrapper {
-    display: flex;
-    justify-content: center;
-    margin-top: 40px;
-}
-
-/* tabel styling */
-table {
-    border-collapse: collapse;
-    width: 80%;
-    max-width: 700px;
-    background: white;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-}
-
-/* header */
-th {
-    background: #4a90e2;
-    color: white;
-    padding: 12px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-/* cellen */
-td {
-    padding: 12px;
+h1 {
     text-align: center;
-    border-bottom: 1px solid #eee;
+    margin-bottom: 30px;
 }
 
-/* hover effect */
-tr:hover {
-    background: #f2f6ff;
-    transition: 0.2s;
+.card {
+    background: white;
+    max-width: 500px;
+    margin: 40px auto;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    text-align: center;
 }
 
-/* laatste rij geen rand */
-tr:last-child td {
-    border-bottom: none;
+.label {
+    color: #666;
+    font-size: 14px;
+}
+
+#nextHoliday {
+    font-size: 20px;
+    margin-top: 15px;
 }

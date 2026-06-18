@@ -1,56 +1,62 @@
 <!DOCTYPE html>
-<html>
+<html lang="nl">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="feestdagen.css"> 
+    <title>Urenregistratie Dashboard</title>
+
+    <link rel="stylesheet" href="feestdagen.css">
 </head>
+
 <body>
 
-<?php
-     $db_server = "localhost";
-     $db_user = "root";
-     $db_pass = "";
-     $db_name = "feestdagen";
-     $conn = "";
+<h1>Urenregistratie Dashboard</h1>
 
-     $conn = mysqli_connect($db_server, $db_user, $db_pass, $db_name);
-     
-     
-    $sql = "SELECT feestdag, datum, maand FROM feestdagen";
-     $result = $conn->query($sql);
+<div class="card">
+    <div class="label">Eerstvolgende feestdag in Nederland (2026)</div>
+    <div id="nextHoliday">Laden...</div>
+</div>
 
-if ($result && $result->num_rows > 0) {
+<script>
+async function loadNextHoliday() {
+    try {
+        // JOUW VERPLICHTE API
+        const response = await fetch(
+            "https://date.nager.at/api/v3/PublicHolidays/2026/NL"
+        );
 
-    echo "<div class='table-wrapper'>";
-    echo "<table>";
+        const holidays = await response.json();
 
-    // kolom namen
-    echo "<tr>";
-    echo "<th>feestdag</th>";
-    echo "<th>datum</th>";
-    echo "<th>maand</th>";
-    echo "</tr>";
+        const today = new Date();
 
-    // data uit database
-    while($row = $result->fetch_assoc()) {
+        // filter alleen toekomstige feestdagen
+        const futureHolidays = holidays
+            .map(h => ({
+                name: h.localName,
+                date: new Date(h.date)
+            }))
+            .filter(h => h.date >= today)
+            .sort((a, b) => a.date - b.date);
 
-        echo "<tr>";
-        echo "<td>" . htmlspecialchars($row['feestdag']) . "</td>";
-        echo "<td>" . htmlspecialchars($row['datum']) . "</td>";
-        echo "<td>" . htmlspecialchars($row['maand']) . "</td>";
-        echo "</tr>";
+        if (futureHolidays.length === 0) {
+            document.getElementById("nextHoliday").innerHTML =
+                "Geen komende feestdagen gevonden.";
+            return;
+        }
+
+        const next = futureHolidays[0];
+
+        document.getElementById("nextHoliday").innerHTML =
+            `<strong>${next.name}</strong><br>${next.date.toLocaleDateString('nl-NL')}`;
+
+    } catch (error) {
+        console.error(error);
+        document.getElementById("nextHoliday").innerHTML =
+            "Kon feestdagen niet laden.";
     }
-
-    echo "</table>";
-    echo "</div>";
-
-} else {
-    echo "0 resultaten";
 }
 
-$conn->close();
-        
-        ?>
+loadNextHoliday();
+</script>
 
 </body>
 </html>

@@ -13,7 +13,7 @@
 
 <div class="card">
     <div class="label">Eerstvolgende feestdag in Nederland (2026)</div>
-    <div id="nextHoliday">Laden...</div>
+    <div id="nextHoliday">Laden</div>
 </div>
 
 <script>
